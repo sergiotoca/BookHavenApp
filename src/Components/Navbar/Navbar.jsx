@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '../Assets/BookHaven.svg'
 import cart_icon from '../Assets/cart.png'
-import { ShopContext } from '../../Context/ShopContext'
+import ShopContext from '../../Context/ShopContext'
 
 export const Navbar = () => {
 
