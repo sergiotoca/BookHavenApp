@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useGlobalContext } from "../../Context/context.jsx";
-import "./trendingBooks.css"; // Import your CSS file for styling
+import "./TrendingBooks.css"; // Import your CSS file for styling
+import { Item } from '../Item/Item.jsx'
 
 const TrendingBooks = () => {
-  const { books, loading, resultTitle } = useGlobalContext();
+  const { books, loading, resultTitle, fetchTrendingBooks } = useGlobalContext();
 
+  useEffect(() => {
+    fetchTrendingBooks();
+  }, []);  // The empty array ensures this effect runs only once after the component mounts
+
+  
   if (loading) {
     return <div className="trending-books-container">Loading...</div>;
   }
@@ -15,6 +21,7 @@ const TrendingBooks = () => {
       <div className="books-grid">
         {books.map((book) => (
           <div key={book.id} className="book-card">
+            {/* <Item key={i} id={book.id} name={book.title} image={book.cover_id}/> */}
             <img
               src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
               alt={book.title}

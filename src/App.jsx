@@ -7,16 +7,14 @@ import { Product } from "./Pages/Product";
 import { LoginSignup } from "./Pages/LoginSignup";
 import { Cart } from "./Pages/Cart";
 import { Footer } from "./Components/Footer/Footer";
-import TrendingBooks from "./Components/TrendingBooks/trendingBooks";
+import TrendingBooks from "./Components/TrendingBooks/TrendingBooks";
 import ShopContextProvider from "./Context/ShopContext";
 import { AppProvider } from "./Context/context";
 
 function App() {
   return (
     <BrowserRouter>
-      <ShopContextProvider>
-        <AppProvider>
-          <Navbar />
+      <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
             <Route path="/trending-books" element={<TrendingBooks />} />
@@ -31,8 +29,6 @@ function App() {
             <Route path="/login" element={<LoginSignup />} />
           </Routes>
           <Footer />
-        </AppProvider>
-      </ShopContextProvider>
     </BrowserRouter>
   );
 }

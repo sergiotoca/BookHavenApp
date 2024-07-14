@@ -1,16 +1,14 @@
 import React from "react";
 import "./Hero.css";
 import hero_image from "../Assets/hero_image.png";
-import { useGlobalContext } from "../../Context/context.jsx";
+import { useGlobalContext } from "../../Context/context";
 import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
-  const { fetchTrendingBooks } = useGlobalContext();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchTrendingBooks();
     navigate("/trending-books");
   };
 
