@@ -1,43 +1,60 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import './ProductDisplay.css';
-import star_icon from '../Assets/star_icon.png'
-import star_dull_icon from '../Assets/star_dull_icon.png'
+import star_icon from '../Assets/star_icon.png';
+import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from '../../Context/ShopContext';
 
 export const ProductDisplay = (props) => {
     const { product } = props;
     const { addToCart } = useContext(ShopContext);
 
+    // Calculate average rating from reviews
+    const getAverageRating = (reviews) => {
+        const total = reviews.reduce((acc, review) => acc + review.stars, 0);
+        return reviews.length > 0 ? total / reviews.length : 0;
+    };
+
+    // Create stars display
+    const renderStars = (average) => {
+        const fullStars = Math.floor(average);
+        const hasHalfStar = average % 1 >= 0.5;
+        const totalStars = fullStars + (hasHalfStar ? 1 : 0);
+        const stars = [];
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<img src={star_icon} alt="Full star" key={i} />);
+        }
+        if (hasHalfStar) {
+            stars.push(<img src={star_icon} alt="Half star" key="half-star" />);
+        }
+        while (stars.length < 5) {
+            stars.push(<img src={star_dull_icon} alt="Empty star" key={`empty-${stars.length}`} />);
+        }
+
+        return stars;
+    };
+
+    const averageRating = getAverageRating(product.reviews);
+
     return (
         <div className='productdisplay'>
             <div className='productdisplay-left'>
-                {/* Image Selector If Needed*/}
-                {/* <div className='productdisplay-img-list'>
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
-                </div> */}
                 <div className="productdisplay-img">
-                    <img className='productdisplay-main-img' src={product.image} alt="" />
+                    <img className='productdisplay-main-img' src={product.image} alt={product.name} />
                 </div>
             </div>
             <div className='productdisplay-right'>
                 <h1>{product.name}</h1>
                 <div className='productdisplay-right-stars'>
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_dull_icon} alt="" />
-                    <p>(122)</p>
+                    {renderStars(averageRating)}
+                    <p>({product.reviews.length} reviews)</p>
                 </div>
                 <div className='productdisplay-right-prices'>
-                    <div className='productdisplay-right-price-old'>{product.old_price}</div>
-                    <div className='productdisplay-right-price-new'>{product.new_price}</div>
+                    <div className='productdisplay-right-price-old'>${product.old_price.toFixed(2)}</div>
+                    <div className='productdisplay-right-price-new'>${product.new_price.toFixed(2)}</div>
                 </div>
                 <div className='productdisplay-right-description'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    {product.short_description}
                 </div>
                 <div className='productdisplay-right-size'>
                     <h1>Select Option</h1>

@@ -1,17 +1,50 @@
-import React from 'react'
-import './DescriptionBox.css'
+import React, { useState } from 'react';
+import './DescriptionBox.css';
 
-export const DescriptionBox = () => {
+export const DescriptionBox = (props) => {
+    const { product } = props;
+
+    // State to track which content to show, defaulting to showing the description
+    const [showDescription, setShowDescription] = useState(true);
+
+    // Function to toggle between showing description and reviews
+    const toggleContent = (isDescription) => {
+        setShowDescription(isDescription);
+    };
+
     return (
         <div className='descriptionbox'>
-          <div className='descriptionbox-navigator'>
-            <div className='descriptionbox-nav-box'>Description</div>
-            <div className='descriptionbox-nav-box fade'>Reviews (122)</div>
-          </div>
-          <div className='descriptionbox-description'>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
+            <div className='descriptionbox-navigator'>
+                {/* Toggle to description view */}
+                <div className={`descriptionbox-nav-box ${showDescription ? '' : 'fade'}`} onClick={() => toggleContent(true)}>
+                    Description
+                </div>
+                {/* Toggle to reviews view */}
+                <div className={`descriptionbox-nav-box ${!showDescription ? '' : 'fade'}`} onClick={() => toggleContent(false)}>
+                    Reviews ({product.reviews.length})
+                </div>
+            </div>
+            <div className='descriptionbox-content'>
+                {/* Conditional rendering based on state */}
+                {showDescription ? (
+                    <div className='descriptionbox-description'>
+                        {product.long_description}
+                    </div>
+                ) : (
+                    <div className='descriptionbox-reviews'>
+                        {product.reviews.length > 0 ? (
+                            product.reviews.map((review, index) => (
+                                <div key={index} className='review'>
+                                    <p><strong>Rating:</strong> {review.stars} Stars</p>
+                                    <p>{review.text}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No reviews yet.</p>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
-      );
+    );
 }
