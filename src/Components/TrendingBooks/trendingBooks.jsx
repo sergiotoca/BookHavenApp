@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "../../Context/context.jsx";
 import bookPlaceholder from '../Assets/book.jpg'; // Import your placeholder image
-import "./trendingBooks.css";
+import "./TrendingBooks.css";
 
 const TrendingBooks = () => {
   const { books, loading, resultTitle, fetchTrendingBooks } = useGlobalContext();

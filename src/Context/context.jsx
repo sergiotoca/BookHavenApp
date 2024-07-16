@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [resultTitle, setResultTitle] = useState("");
+  const [showTrending, setShowTrending] = useState(false);
 
   const fetchTrendingBooks = useCallback(async () => {
     setLoading(true);
@@ -41,7 +42,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ books, loading, resultTitle, fetchTrendingBooks }}>
+    <AppContext.Provider value={{ books, loading, resultTitle, fetchTrendingBooks,  showTrending, setShowTrending}}>
       {children}
     </AppContext.Provider>
   );

@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useContext } from "react";
 import "./Hero.css";
 import hero_image from "../Assets/hero_image.png";
 import { useGlobalContext } from "../../Context/context";
 
-export const Hero = ({ showTrending, setShowTrending }) => {
 
+export const Hero = () => {
+  const { showTrending, setShowTrending } =  useGlobalContext();
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowTrending(true); // Update the state to show trending books
+    if(showTrending){setShowTrending(false)}else{setShowTrending(true)}; // Update the state to show trending books
   };
 
   return (

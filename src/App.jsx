@@ -7,28 +7,19 @@ import { Product } from "./Pages/Product";
 import { LoginSignup } from "./Pages/LoginSignup";
 import { Cart } from "./Pages/Cart";
 import { Footer } from "./Components/Footer/Footer";
-import TrendingBooks from "./Components/TrendingBooks/trendingBooks";
+import TrendingBooks from "./Components/TrendingBooks/TrendingBooks";
 import ShopContextProvider from "./Context/ShopContext";
 import { AppProvider } from "./Context/context";
 import { Hero } from "./Components/Hero/Hero";
 
 function App() {
-  const [showTrending, setShowTrending] = useState(false);
+  
 
   return (
-    <AppProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero showTrending={showTrending} setShowTrending={setShowTrending} />
-                {showTrending && <TrendingBooks />}
-              </>
-            }
-          />
+          <Route path="/"  element={<Shop />} />
           <Route path="/trending-books" element={<TrendingBooks />} />
           <Route path="/classic" element={<ShopCategory category="classic" />} />
           <Route path="/modern" element={<ShopCategory category="modern" />} />
@@ -42,7 +33,6 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </AppProvider>
   );
 }
 
