@@ -2,14 +2,12 @@ import React from "react";
 import "./Hero.css";
 import hero_image from "../Assets/hero_image.png";
 import { useGlobalContext } from "../../Context/context";
-import { useNavigate } from "react-router-dom";
 
-export const Hero = () => {
-  const navigate = useNavigate();
+export const Hero = ({ showTrending, setShowTrending }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/trending-books");
+    setShowTrending(true); // Update the state to show trending books
   };
 
   return (
