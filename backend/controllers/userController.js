@@ -38,10 +38,10 @@ exports.login = async (req, res) => {
                 const token = jwt.sign(data, 'secret_ecom');
                 res.json({ success: true, token });
             } else {
-                res.json({ success: false, errors: "Wrong Password" });
+                res.json({ success: false, error: "Wrong Password" });
             }
         } else {
-            res.json({ success: false, errors: "Wrong Email Id" });
+            res.json({ success: false, error: "Wrong Email Id" });
         }
     } catch (error) {
         res.status(500).json({ success: false, error: "Server error during login." });
