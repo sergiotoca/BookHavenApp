@@ -23,6 +23,7 @@ export const Navbar = () => {
             <li onClick={()=>{setMenu("modern")}}><Link to='/modern'>Modern Literature</Link>{menu==="modern"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("science")}}><Link to='science'>Science</Link>{menu==="science"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("history")}}><Link to='history'>History</Link>{menu==="history"?<hr/>:<></>}</li>
+            {/* <li onClick={() => setMenu("admin")}><Link to='/admin'>Admin</Link>{menu === "admin" && <hr />}</li> */}
         </ul>
         <div className="nav-login-cart">
             {localStorage.getItem('auth-token')

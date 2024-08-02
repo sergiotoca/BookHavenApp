@@ -1,4 +1,5 @@
-require('dotenv').config();
+require('dotenv').config({ path: './config.env' });  // Make sure this is at the top
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -10,6 +11,7 @@ const port = process.env.PORT || 4000;
 const { type } = require("os");
 const { log } = require("console");
 
+
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -17,8 +19,13 @@ app.use(cors());
 // Static files for images
 app.use('/images', express.static('upload/images'));
 
+// Verify environment variable
+console.log('MongoDB URI:', process.env.MONGO_URI);
+
 // Database Connection:
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch((error) => console.error('MongoDB connection error:', error));
 
 // Routes
 app.use('/api/books', bookRoutes);
@@ -30,11 +37,10 @@ app.get("/", (req, res) => {
     res.send("Express App is Running");
 });
 
-app.listen(port, (error)=>{
+app.listen(port, (error) => {
     if (!error) {
-        console.log("Server Running on Port "+port)
-    }
-    else{
-        console.log("Error: "+error)
+        console.log("Server Running on Port " + port);
+    } else {
+        console.log("Error: " + error);
     }
 });

@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-exports.uploadSingle = upload.single('book');  // This middleware function is to be used in routes
+exports.uploadSingle = upload.single('product');  // This middleware function is to be used in routes
 
 exports.uploadImage = (req, res) => {
     if (req.file) {

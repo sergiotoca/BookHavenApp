@@ -11,6 +11,7 @@ import TrendingBooks from "./Components/TrendingBooks/TrendingBooks";
 import ShopContextProvider from "./Context/ShopContext";
 import { AppProvider } from "./Context/context";
 import { Hero } from "./Components/Hero/Hero";
+// import Admin from '../../admin/src/App';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
           </Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginSignup />} />
+          {/* <Route path="/admin" element={<Admin />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
