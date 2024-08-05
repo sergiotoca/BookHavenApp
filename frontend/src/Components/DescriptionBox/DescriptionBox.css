@@ -1,59 +1,72 @@
 .descriptionbox {
-    margin: 120px 170px;
-  }
-  
-  .descriptionbox-navigator {
-    display: flex;
-  }
-  
-  .descriptionbox-nav-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
-    width: 171px;
-    height: 70px;
-    border: 1px solid #d0d0d0;
-  }
+  margin: 120px 170px;
+}
 
-  .descriptionbox-nav-box.fade{
-    background: #FBFBFB;
-    color: #555;
-  }
+.descriptionbox-navigator {
+  display: flex;
+}
 
-  .descriptionbox-description{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    border: 1px solid #D0D0D0;
-    padding: 48px;
-    padding-bottom: 70px;
-  }
+.descriptionbox-nav-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  width: 171px;
+  height: 70px;
+  border: 1px solid #d0d0d0;
+  cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+}
 
-  .descriptionbox-reviews{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    border: 1px solid #D0D0D0;
-    padding: 48px;
-    padding-bottom: 70px;
-  }
+.descriptionbox-nav-box.fade {
+  background: #FBFBFB;
+  color: #555;
+}
 
+.descriptionbox-description {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px solid #D0D0D0;
+  padding: 48px;
+  padding-bottom: 70px;
+}
 
-  .review {
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e0; /* Separates individual reviews */
+.descriptionbox-reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px solid #D0D0D0;
+  padding: 48px;
+  padding-bottom: 70px;
+}
+
+.review {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0; /* Separates individual reviews */
 }
 
 .review:last-child {
-    border-bottom: none; /* Removes the border from the last review */
+  border-bottom: none; /* Removes the border from the last review */
 }
 
 .review p {
-    margin: 5px 0; /* Margins for paragraph spacing within reviews */
+  margin: 5px 0; /* Margins for paragraph spacing within reviews */
 }
 
 .review strong {
-    color: #333; /* Makes rating labels stand out */
+  color: #333; /* Makes rating labels stand out */
+}
+
+/* Star ratings styles */
+.star-rating {
+  font-size: 24px; /* Adjust size as needed */
+}
+
+.star-rating .full-star {
+  color: gold; /* Yellow color for full stars */
+}
+
+.star-rating .empty-star {
+  color: #d0d0d0; /* Light grey color for empty stars */
 }

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useCallback, useState } from 'react';
 
-const URL = "https://openlibrary.org/search.json?title=";
+const API_URL = "http://localhost:4000/api/books/trending%20books";
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
@@ -12,20 +12,22 @@ const AppProvider = ({ children }) => {
   const fetchTrendingBooks = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${URL}trending`);
+      const response = await fetch(API_URL);
       const data = await response.json();
-      const { docs } = data;
 
-      if (docs) {
-        const newBooks = docs.slice(0, 20).map((bookSingle) => {
-          const { key, author_name, cover_i, edition_count, first_publish_year, title } = bookSingle;
+      if (data) {
+        const newBooks = data.map((bookSingle) => {
+          const { id, name, image, category, new_price, old_price, short_description, long_description, reviews } = bookSingle;
           return {
-            id: key,
-            author: author_name,
-            cover_id: cover_i,
-            edition_count: edition_count,
-            first_publish_year: first_publish_year,
-            title: title
+            id: id,
+            title: name,
+            cover_image: image,
+            category: category,
+            new_price: new_price,
+            old_price: old_price,
+            short_description: short_description,
+            long_description: long_description,
+            reviews: reviews
           };
         });
         setBooks(newBooks);
@@ -42,7 +44,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ books, loading, resultTitle, fetchTrendingBooks,  showTrending, setShowTrending}}>
+    <AppContext.Provider value={{ books, loading, resultTitle, fetchTrendingBooks, showTrending, setShowTrending }}>
       {children}
     </AppContext.Provider>
   );

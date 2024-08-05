@@ -1,28 +1,39 @@
-.relatedproduts{
+.relatedproducts {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    height: 90vh;
+    padding: 20px; /* Optional padding for better spacing */
 }
 
-.relatedproduts h1{
+.relatedproducts h1 {
     color: #171717;
-    font-size: 50px;
+    font-size: 24px; /* Adjust font size as needed */
     font-weight: 600;
-}
-.relatedproduts hr{
-    width: 200px;
-    height: 6px;
-    border-radius: 10px;
-    background: #252525;
-}
-.relatedproduts-item{
-    margin-top: 50px;
-    display: flex;
-    gap: 30px;
+    margin-bottom: 10px; /* Space below the heading */
 }
 
-.relatedproduts-item img{
-    max-width: 200px;
+.relatedproducts hr {
+    width: 100%;
+    max-width: 200px; /* Control width of the line */
+    height: 4px; /* Slightly thinner line */
+    border-radius: 5px;
+    background: #252525;
+    margin-bottom: 20px; /* Space below the line */
+}
+
+.relatedproducts-item {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    gap: 20px; /* Adjust gap to control spacing between items */
+    justify-content: center; /* Center items horizontally */
+    width: 100%; /* Ensure it takes the full width available */
+    max-width: 1200px; /* Optionally limit the maximum width of the container */
+}
+
+.item {
+    flex: 1 0 200px; /* Flex-grow, flex-shrink, flex-basis */
+    max-width: 250px; /* Ensure items do not exceed this width */
+    margin: 10px; /* Margin to ensure spacing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }

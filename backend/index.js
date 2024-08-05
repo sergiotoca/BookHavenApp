@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config.env' });  // Make sure this is at the top
+require('dotenv').config({ path: './config.env' });  
 
 const express = require("express");
 const mongoose = require("mongoose");

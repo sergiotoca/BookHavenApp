@@ -1,25 +1,78 @@
-.item{
-    width: 350px;
-}
-.item p{
-    margin: 6px 0px;
-}
-.item-prices{
+/* Main container for each book item */
+.item {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin: 20px; /* Adjust margin as needed */
+    width: 250px; /* Increase the width of the book items */
 }
-.item-price-new{
+
+/* Hover effect for book items */
+.item:hover {
+    transform: translateY(-5px);
+}
+
+/* Container for the book image */
+.item .book-image-container {
+    width: 100%;
+    height: 300px; /* Fixed height for the book cover container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Light background color for placeholder */
+    overflow: hidden; /* Ensure image does not overflow */
+}
+
+/* Image styling within book items */
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ensure book title and author don't overlap */
+.item .book-info {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* Styling for the book title */
+.item p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #3d3d3d; /* Adjust text color */
+    font-weight: bold; /* Make the title bold */
+}
+
+/* Styling for the book price */
+.item .item-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Styling for the new price */
+.item .item-price-new {
     color: #374151;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: normal; /* Unbold the price */
 }
-.item-price-old{
+
+/* Styling for the old price */
+.item .item-price-old {
     color: #8c8c8c;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: normal; /* Unbold the price */
     text-decoration: line-through;
 }
-.item:hover{
-    transform: scale(1.05);
-    transition: 0.6s;
+
+/* Grid layout for the books */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min width to match item width */
+    gap: 20px; /* Gap between books */
 }

@@ -22,13 +22,14 @@ function App() {
         <Routes>
           <Route path="/"  element={<Shop />} />
           <Route path="/trending-books" element={<TrendingBooks />} />
-          <Route path="/classic" element={<ShopCategory category="classic" />} />
-          <Route path="/modern" element={<ShopCategory category="modern" />} />
+          <Route path="/classic" element={<ShopCategory category="classic literature" />} />
+          <Route path="/modern" element={<ShopCategory category="modern literature" />} />
           <Route path="/science" element={<ShopCategory category="science" />} />
           <Route path="/history" element={<ShopCategory category="history" />} />
           <Route path="product" element={<Product />}>
             <Route path=":productId" element={<Product />} />
-          </Route>
+          </Route> 
+          
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginSignup />} />
           {/* <Route path="/admin" element={<Admin />} /> */}
