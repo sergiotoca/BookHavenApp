@@ -84,7 +84,9 @@ exports.addBook = async (req, res) => {
         image: req.body.image,
         category: req.body.category,
         new_price: req.body.new_price,
-        old_price: req.body.old_price
+        old_price: req.body.old_price,
+        short_description:req.body.short_description,
+        long_description:req.body.long_description,
     });
 
     await book.save();

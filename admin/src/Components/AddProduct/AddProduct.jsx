@@ -1,11 +1,13 @@
 import './AddProduct.css';
-import upload_area from '../../assets/upload_area.svg'
+import upload_area from '../../assets/upload_area.svg';
 import React, { useState } from 'react';
 
 const AddProduct = () => {
     const [image, setImage] = useState(null);
     const [productDetails, setProductDetails] = useState({
         name: "",
+        short_description: "",
+        long_description: "",
         image: "",
         category: "women",
         new_price: "",
@@ -20,14 +22,14 @@ const AddProduct = () => {
         setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
     };
 
-    const AddProduct = async () => {
+    const addProduct = async () => {
         if (!image) {
             alert("Please upload an image");
             return;
         }
 
         let formData = new FormData();
-        formData.append('product', image);  // Ensure the field name matches 'product' in backend
+        formData.append('product', image); // Ensure the field name matches 'product' in backend
 
         try {
             const uploadResponse = await fetch('http://localhost:4000/api/files/upload', {
@@ -39,7 +41,6 @@ const AddProduct = () => {
 
             if (responseData.success) {
                 productDetails.image = responseData.image_url;
-                console.log(productDetails);
 
                 const addResponse = await fetch('http://localhost:4000/api/books/addbook', {
                     method: 'POST',
@@ -51,8 +52,10 @@ const AddProduct = () => {
                 });
 
                 const addData = await addResponse.json();
+                
 
                 if (addData.success) {
+                    console.log(productDetails); 
                     alert('Product Added');
                 } else {
                     alert('Failed to add product');
@@ -72,6 +75,14 @@ const AddProduct = () => {
                 <p>Product title</p>
                 <input type="text" name="name" placeholder="Type here" onChange={changeHandler} />
             </div>
+            <div className="addproduct-itemfield">
+                <p>Short Description</p>
+                <input type="text" name="short_description" placeholder="Type here" onChange={changeHandler} />
+            </div>
+            <div className="addproduct-itemfield">
+                <p>Long Description</p>
+                <input type="text" name="long_description" placeholder="Type here" onChange={changeHandler} />
+            </div>
             <div className="addproduct-price">
                 <div className="addproduct-itemfield">
                     <p>Price</p>
@@ -85,18 +96,18 @@ const AddProduct = () => {
             <div className="addproduct-itemfield">
                 <p>Product Category</p>
                 <select name="category" value={productDetails.category} onChange={changeHandler} className="add-product-selector">
-                    <option value="women">Fiction</option>
-                    <option value="men">Magazines</option>
-                    <option value="kid">Biography</option>
+                    <option value="fiction">Classic Literature</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
                 </select>
             </div>
             <div className="addproduct-itemfield">
                 <label htmlFor="file-input" className="file-input">
-                    <img src={image ? URL.createObjectURL(image) : upload_area} className="addproduct-thumbnail-img" />
+                    <img src={image ? URL.createObjectURL(image) : upload_area} className="addproduct-thumbnail-img" alt="Upload" />
                 </label>
                 <input type="file" onChange={imageHandler} name="image" id="file-input" hidden />
             </div>
-            <button onClick={AddProduct} className="addproduct-btn">ADD</button>
+            <button onClick={addProduct} className="addproduct-btn">ADD</button>
         </div>
     );
 };
