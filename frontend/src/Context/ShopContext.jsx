@@ -5,23 +5,11 @@ export const ShopContext = createContext(null);
 const ShopContextProvider = (props) => {
     const [allBooks, setAllBooks] = useState([]);
     const [cartItems, setCartItems] = useState({});
-    const [category, setCategory] = useState("");
-
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const url = category
-                    ? `http://localhost:4000/api/books/${category}`
-                    : 'http://localhost:4000/api/books/allbooks';
-                const response = await fetch(url);
-                const data = await response.json();
-                setAllBooks(data);
-            } catch (error) {
-                console.error("Error fetching books:", error);
-            }
-        };
-
-        fetchBooks();
+    
+    useEffect(()=>{
+        fetch('http://localhost:4000/api/books/allbooks')
+        .then((response)=>response.json())
+        .then((data)=>setAllBooks(data))
 
         if (localStorage.getItem('auth-token')) {
             fetch('http://localhost:4000/api/users/getcart', {
@@ -36,7 +24,7 @@ const ShopContextProvider = (props) => {
                 .then((response) => response.json())
                 .then((data) => setCartItems(data));
         }
-    }, [category]);
+    }, []);
 
     const addToCart = (itemId) => {
         setCartItems((prev) => {
@@ -114,7 +102,7 @@ const ShopContextProvider = (props) => {
         return totalItem;
     };
 
-    const contextValue = { getTotalCartItems, getTotalCartAmount, allBooks, cartItems, addToCart, removeFromCart, setCategory };
+    const contextValue = { getTotalCartItems, getTotalCartAmount, allBooks, cartItems, addToCart, removeFromCart };
 
     return (
         <ShopContext.Provider value={contextValue}>

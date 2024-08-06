@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+
 exports.signup = async (req, res) => {
     try {
         let check = await User.findOne({ email: req.body.email });
@@ -29,6 +30,7 @@ exports.signup = async (req, res) => {
         const token = jwt.sign(data, process.env.JWT_SECRET);
         res.json({ success: true, token });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ success: false, error: "Server error during signup." });
     }
 };
@@ -49,6 +51,7 @@ exports.login = async (req, res) => {
             res.json({ success: false, error: "Wrong Email Id" });
         }
     } catch (error) {
+        console.log(error);
         res.status(500).json({ success: false, error: "Server error during login." });
     }
 };

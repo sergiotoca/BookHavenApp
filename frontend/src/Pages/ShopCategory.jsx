@@ -5,11 +5,9 @@ import dropdown_icon from '../Components/Assets/dropdown_icon.png';
 import { Item } from '../Components/Item/Item';
 
 export const ShopCategory = (props) => {
-    const { allBooks, setCategory } = useContext(ShopContext);
+    const { allBooks } = useContext(ShopContext);
 
-    useEffect(() => {
-        setCategory(props.category);
-    }, [props.category, setCategory]);
+
 
     return (
         <div className='shop-category'>
@@ -24,17 +22,13 @@ export const ShopCategory = (props) => {
             </div>
             <div className="shopcategory-products">
                 <div className="books-grid">
-                    {allBooks.map((item, i) => (
-          <Item
-            key={i}
-            id={item.id}
-            name={item.name}
-            image={item.image || bookPlaceholder} // Use placeholder if image is missing
-            new_price={item.new_price}
-            old_price={item.old_price}
-          />
-        ))}
-                   
+                    {allBooks.map((item, i) => {
+                        if (props.category === item.category) {
+                            return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>;
+                        } else {
+                            return null;
+                        }
+                    })}
                 </div>
             </div>
             <div className="shopcategory-loadmore">
